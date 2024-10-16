@@ -23,7 +23,7 @@ void setup() {
 
 void loop() { 
   // DAC only has one channel (1), loop function loops through different values (0-4095)    
-  for (int value = 0; value <= 4096; value += 512) {
+  for (int value = 0; value <= 4096; value += 315) {
     MCP.write(value, 1); // Args: value (0-4095), channel (1)
     // Note that 4096 exceeds the max value of 4095 but for the purpose of including 4095 this is fine
     
@@ -41,7 +41,7 @@ void loop() {
 }
 
 float analog_to_voltage() {
-  float Vout = 3.3 * ((float)analogRead(A1)) / 1024.0; 
+  float Vout = 3.3 * ((float)analogRead(A1) * 1.1744) / 1023.0; 
   // Output voltage formula (1024 = 2^10 for 10 bit DAC, Vref = 3.3 V)
   return Vout;
   // Output voltage is off by a scaling factor of ~1.33
